@@ -33,7 +33,7 @@ public class scr_PickUp : MonoBehaviour
             // Check if the hit object has the "Weapon" tag
             if (hit.collider.CompareTag("Weapon")) {
                 // Pick up the weapon
-                PickupWeapon(hit.collider.gameObject.scr_Weapon);
+                PickupWeapon(hit.collider.gameObject.GetComponent<scr_Weapon>());
             }
         }
     }

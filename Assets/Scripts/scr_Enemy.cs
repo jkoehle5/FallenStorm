@@ -25,6 +25,7 @@ public class scr_Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         //animation = GetComponent<Animator>();
         rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
+        weapon.AttachGunToRightHand(motion);
     }
 
     // Update is called once per frame

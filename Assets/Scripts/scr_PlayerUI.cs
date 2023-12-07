@@ -17,9 +17,9 @@ public class scr_PlayerUI : MonoBehaviour
         // Find the player GameObject in the scene
         player = GameObject.FindGameObjectWithTag("Player");
 
-        // Get the FPSPlayerController and FPSGun components from the player
+        // Get the components from the player
         playerHealth = player.GetComponent<scr_PlayerHealth>();
-        playerGun = player.GetComponentInChildren<scr_Weapon>();
+        //playerGun = player.GetComponentInChildren<scr_Weapon>();
 
         // Set initial values for HUD elements
         UpdateAmmoCounter();
@@ -34,11 +34,16 @@ public class scr_PlayerUI : MonoBehaviour
 
     void UpdateAmmoCounter() {
         // Display the current ammo count and max ammo
-        ammoCounter.text = "Ammo: " + playerGun.clip + " / " + playerGun.ammo;
+        if (playerGun != null) {
+            ammoCounter.text = "Ammo: " + playerGun.clip + " / " + playerGun.ammo;
+        } else {
+            ammoCounter.text = "Ammo: __ / __";
+        }
+        
     }
 
     void UpdateHealthBar() {
-        // Display the player's health using a slider
+        // Display the player's health
         healthBar.text = playerHealth.health + " / 100";
     }
 }

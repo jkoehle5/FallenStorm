@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8145404097301632206}
   - component: {fileID: 33699190840813150}
   - component: {fileID: 23280471604157296}
+  - component: {fileID: 5349442289953753830}
+  - component: {fileID: 2864272850022235238}
   m_Layer: 0
   m_Name: M4_8
   m_TagString: Untagged
@@ -57,12 +59,14 @@ MonoBehaviour:
   fireInterval: 2.5
   auto: 0
   self: {fileID: 1117582899397640}
+  rb: {fileID: 5349442289953753830}
   dmg: 15
   range: 250
   clipSize: 30
   ammo: 150
   clip: 30
-  sights: {fileID: 0}
+  sights: {fileID: 247615386275400550}
+  inHand: 0
 --- !u!33 &33699190840813150
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -113,6 +117,54 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &5349442289953753830
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117582899397640}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &2864272850022235238
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117582899397640}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08, y: 0.3, z: 0.9}
+  m_Center: {x: 0, y: 0.02, z: 0.03}
 --- !u!1 &1426050648627750
 GameObject:
   m_ObjectHideFlags: 0

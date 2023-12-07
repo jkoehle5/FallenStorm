@@ -32,13 +32,11 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     }
 
     // Update is called once per frame
-    /*void Update() {
-        if (inHand) {
-
-        } else {
-
+    void Update() {
+        if(!inHand && ammo == 0) {
+            Destroy(self);
         }
-    }*/
+    }
 
     public void Shoot() {
         Ray ray = new Ray(self.transform.position, self.transform.forward);
@@ -47,7 +45,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
                 // Deal damage
                 other.TakeDamage(dmg);
             } else {
-                // Generate effect
+                // Generate effect at point of impact
 
             }
         }
@@ -92,7 +90,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         rb.velocity += Vector3.up * 1.5f;
     }
 
-    void AttachGunToRightHand(Animator motion) {
+    public void AttachGunToRightHand(Animator motion) {
         // Get the right hand bone transform
         Transform rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
 
@@ -101,6 +99,8 @@ public class scr_Weapon : MonoBehaviour//, Interactable
             self.transform.parent = rightHandTransform;
             self.transform.localPosition = Vector3.zero;
             self.transform.localRotation = Quaternion.identity;
+
+            //rb.
 
 
             Debug.Log("Gun attached to the right hand!");
