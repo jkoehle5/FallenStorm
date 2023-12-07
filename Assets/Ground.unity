@@ -629,7 +629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4952727429218122, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1.335
       objectReference: {fileID: 0}
     - target: {fileID: 4952727429218122, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2173,6 +2173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoCounter: {fileID: 42645375}
   healthBar: {fileID: 994693860}
+  playerGun: {fileID: 0}
 --- !u!1 &1390078571
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,6 +2297,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3148725820219393382, guid: de64bfe7af05beb4d81d49a83d2c721c,
+        type: 3}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 1265851589}
     - target: {fileID: 4503048257476974021, guid: de64bfe7af05beb4d81d49a83d2c721c,
         type: 3}
       propertyPath: jump

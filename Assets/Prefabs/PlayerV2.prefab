@@ -890,7 +890,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupRange: 3
   playerCam: {fileID: 8742897506539539777}
-  playerContact: {fileID: 0}
+  playerContact: {fileID: 6143456882716719251}
+  player: {fileID: 5316313090073308038}
+  ui: {fileID: 0}
 --- !u!114 &4271251568398824176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,7 +1203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8176459934087114629}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 6.5854455e-10, z: -6.5854455e-10, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

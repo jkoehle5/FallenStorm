@@ -82,6 +82,8 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
     public void Drop(Transform pos) {
         
+        rb.isKinematic = true;
+        rb.useGravity = true;
         rb.mass = 0.1f;
         transform.SetParent(null);
         inHand = false;
@@ -97,11 +99,11 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         if (rightHandTransform != null) {
             // Attach the gun to the right hand
             self.transform.parent = rightHandTransform;
-            self.transform.localPosition = Vector3.zero;
-            self.transform.localRotation = Quaternion.identity;
+            self.transform.localPosition = new Vector3 (0.045f, 0.3f, 0.045f);
+            self.transform.localRotation = Quaternion.Euler(-90f, 0f, 180f);
 
-            //rb.
-
+            rb.isKinematic = false;
+            rb.useGravity = false;
 
             Debug.Log("Gun attached to the right hand!");
         }
