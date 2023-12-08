@@ -122,7 +122,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         rb.velocity += Vector3.up * 1.5f;
     }
 
-    public void AttachGunToRightHand(Animator motion) {
+    public void AttachGunToRightHandEnemy(Animator motion) {
         // Get the right hand bone transform
         Transform rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
 
@@ -131,6 +131,26 @@ public class scr_Weapon : MonoBehaviour//, Interactable
             self.transform.parent = rightHandTransform;
             self.transform.localPosition = new Vector3 (0.045f, 0.3f, 0.045f);
             self.transform.localRotation = Quaternion.Euler(-90f, 0f, 180f);
+
+            rb.isKinematic = false;
+            rb.useGravity = false;
+
+            Debug.Log("Gun attached to the right hand!");
+        }
+        else {
+            Debug.LogError("Failed to get right hand transform!");
+        }
+    }
+
+    public void AttachGunToRightHand(Animator motion) {
+        // Get the right hand bone transform
+        Transform rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
+
+        if (rightHandTransform != null) {
+            // Attach the gun to the right hand
+            self.transform.parent = rightHandTransform;
+            self.transform.localPosition = new Vector3 (0.13f, -0.05f, 0.05f);
+            self.transform.localRotation = Quaternion.Euler(0f, 90f, 90f);
 
             rb.isKinematic = false;
             rb.useGravity = false;

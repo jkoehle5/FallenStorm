@@ -31,10 +31,11 @@ public class scr_BulletBrain : MonoBehaviour
         travelTime -= Time.deltaTime;
     }
 
-    private void OnCollisionEnter(Collision other) {
+    private void OnTriggerEnter(Collider other) {
         // If hit entity, inflict damage
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy") {
+        if (other.CompareTag("Player") || other.CompareTag("Enemy")) {
             other.gameObject.GetComponent<scr_PlayerHealth>().TakeDamage(dmg);
+            Destroy(gameObject);
         }
         // Otherwise Delete
         Destroy(gameObject);

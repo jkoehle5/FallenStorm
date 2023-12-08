@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class scr_PauseMenu : MonoBehaviour {
     // Variables
-    [SerializeField] static bool paused = false;
+    [SerializeField] public bool paused;
     [SerializeField] GameObject obj_pauseMenu;
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject menuUI;
@@ -15,6 +15,7 @@ public class scr_PauseMenu : MonoBehaviour {
     void Start() {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        paused = false;
     }
 
     // If esc is pressed pause game or resume based on if it is already or not

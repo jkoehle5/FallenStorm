@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.38358, g: 325.10843, b: 430.30963, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2734,6 +2734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed8a70f63df0ab4dbb3eb38d79ae191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paused: 0
   obj_pauseMenu: {fileID: 1390078571}
   inGameUI: {fileID: 1084796223}
   menuUI: {fileID: 0}
@@ -2880,6 +2881,11 @@ PrefabInstance:
       propertyPath: ui
       value: 
       objectReference: {fileID: 1265851589}
+    - target: {fileID: 4271251568398824176, guid: de64bfe7af05beb4d81d49a83d2c721c,
+        type: 3}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 1265851588}
     - target: {fileID: 4503048257476974021, guid: de64bfe7af05beb4d81d49a83d2c721c,
         type: 3}
       propertyPath: jump
@@ -3190,6 +3196,7 @@ GameObject:
   - component: {fileID: 2100376224}
   - component: {fileID: 2100376223}
   - component: {fileID: 2100376225}
+  - component: {fileID: 2100376226}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -3396,6 +3403,19 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
+--- !u!114 &2100376226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100376222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce109f9a5d8e594eb2be23018c2b0d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetAspect: 1.7777778
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

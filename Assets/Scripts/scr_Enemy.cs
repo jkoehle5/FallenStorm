@@ -25,7 +25,7 @@ public class scr_Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         //animation = GetComponent<Animator>();
         rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
-        weapon.AttachGunToRightHand(motion);
+        weapon.AttachGunToRightHandEnemy(motion);
     }
 
     // Update is called once per frame
@@ -82,6 +82,7 @@ public class scr_Enemy : MonoBehaviour
 
     private void Attacking () {
         // Set animator to shooting
+        motion.SetBool("isRunnin", false);
         motion.SetBool("Shootin", true);
 
         // Stop and face player
@@ -91,12 +92,22 @@ public class scr_Enemy : MonoBehaviour
         // Attack
         RaycastHit hit;
         Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity);
-        //weapon.Shoot(hit.point);*/
+        weapon.Shoot(hit.point);
+    }
+
+
+    private void Die() {
+        // Drop Gun
+        weapon.Drop(transform);
+
+        // Play Anim
+        //motion.SetBool("Dyin", true);
     }
 
     private enum AIState {
         Patrol,
         Chase,
         Attack,
+        Death,
     }
 }

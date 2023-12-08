@@ -85,6 +85,13 @@ public class scr_PlayerMove : MonoBehaviour
             }
         }
 
+        if (inputManager.PlayerReload()) {
+            // Play Animation
+            //motion.SetBool("Reloadin", true);
+
+            gun.Reload();
+        }
+
         // Apply Movement
         controller.Move(playerVelocity * Time.deltaTime);
         // Apply Movement animation + SFX if movin

@@ -9,6 +9,7 @@ public class scr_PlayerCamera : MonoBehaviour
     [SerializeField] GameObject tCam;
     [SerializeField] Vector2 dampning;
     [SerializeField] Transform player;
+    [SerializeField] scr_PauseMenu ui;
 
     private InputManager inputManager;
     private Vector2 rotate;
@@ -23,8 +24,11 @@ public class scr_PlayerCamera : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        rotate.x -= inputManager.GetMouseDelta().y * dampning.y;
-        rotate.y += inputManager.GetMouseDelta().x * dampning.x;
+        // Check if paused then then take mouse input
+        if (!ui.paused) {
+            rotate.x -= inputManager.GetMouseDelta().y * dampning.y;
+            rotate.y += inputManager.GetMouseDelta().x * dampning.x;
+        }
 
         rotate.x = Mathf.Clamp(rotate.x, 0f, 180f);
         player.Rotate(Vector3.up * rotate.y);
