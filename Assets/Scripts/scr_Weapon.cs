@@ -22,11 +22,18 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     [SerializeField] private int maxAmmo;
     [SerializeField] public int ammo;
     [SerializeField] public int weaponType;
+    [SerializeField] private AudioClip audioClipFire;
+    [SerializeField] private AudioClip audioClipDryFire;
+    [SerializeField] private AudioClip audioClipReload;
+    [SerializeField] private AudioClip audioClipReloadEmpty;
+    [SerializeField] private AudioClip audioClipPickUp;
+
     public int clip;
     public Transform sights;
     public Transform barrel;
     public GameObject bullet;
 
+    private AudioSource audioSource;
     private InputManager inputManager;
     private Animator anime;
     public bool inHand;
@@ -38,6 +45,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         shotInterval = fireInterval;
         inputManager = InputManager.Instance;
         self = this.gameObject;
+        audioSource = GetComponent<AudioSource>();
         //handCam = Camera.main.transform;
         
     }
@@ -87,11 +95,15 @@ public class scr_Weapon : MonoBehaviour//, Interactable
                 if (inputManager.PlayerAim()) {
                     anime.SetBool("isAimin", true);
                 }
+                //audioSource.clip = audioClipFire;
             }
 
             // Decrease ammo
             clip -= 1;
-        }
+        } else {
+            //audioSource.clip = audioClipDryFire;
+            anime.SetBool("Empty", true);
+        } 
     }
 
     public void Interact(Animator other) {
@@ -108,8 +120,10 @@ public class scr_Weapon : MonoBehaviour//, Interactable
             // Play reload sound
             if (anime != null) {
                 anime.SetBool("Reloadin", true);
+                //audioSource.clip = audioClipReload;
                 if (clip <= 0) {
                     anime.SetBool("Empty", true);
+                    //audioSource.clip = audioClipReloadEmpty;
                 }
             }
             
@@ -120,7 +134,9 @@ public class scr_Weapon : MonoBehaviour//, Interactable
             // Play reload sound + animation
             if (anime != null) {
                 anime.SetBool("Reloadin", true);
+                //audioSource.clip = audioClipReload;
                 if (clip <= 0) {
+                    //audioSource.clip = audioClipReloadEmpty;
                     anime.SetBool("Empty", true);
                 } 
             }
@@ -177,6 +193,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
             rb.useGravity = false;
 
             Debug.Log("Gun attached to the right hand!");
+            //audioSource.clip = audioClipPickUp;
         }
         else {
             Debug.LogError("Failed to get right hand transform!");
@@ -200,6 +217,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
             Debug.Log("Gun attached to the right hand!");
             AddAmmo?.Invoke();
+            //audioSource.clip = audioClipPickUp;
         }
         else {
             Debug.LogError("Failed to get right hand transform!");

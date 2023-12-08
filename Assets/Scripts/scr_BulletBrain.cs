@@ -40,4 +40,7 @@ public class scr_BulletBrain : MonoBehaviour
         // Otherwise Delete
         Destroy(gameObject);
     }
+    private void OnDestroy() {
+        
+    }
 }

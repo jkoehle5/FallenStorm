@@ -52,7 +52,7 @@ public class scr_PlayerUI : MonoBehaviour
 
     void UpdateHealthBar() {
         // Display the player's health
-        healthBar.text = playerHealth.health + " / 100";
+        healthBar.text = "HP: " + playerHealth.health + " / 100";
     }
 
     void RemoveAmmo() {

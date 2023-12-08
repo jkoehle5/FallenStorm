@@ -256,7 +256,12 @@ MonoBehaviour:
   maxAmmo: 45
   ammo: 45
   weaponType: 1
-  ui: {fileID: 5616817258855493444, guid: 1f74203b730770a4ab73cadd65a8da3f, type: 3}
+  audioClipFire: {fileID: 8300000, guid: 0addcc409a57b4a43b86a3d2310ac5b4, type: 3}
+  audioClipDryFire: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
+  audioClipReload: {fileID: 8300000, guid: 125edb9e36f963249bc792cca38492b1, type: 3}
+  audioClipReloadEmpty: {fileID: 8300000, guid: c565065df3907944b8b58f0d27066ba8,
+    type: 3}
+  audioClipPickUp: {fileID: 0}
   clip: 9
   sights: {fileID: 6755168752280446619}
   barrel: {fileID: 2579651410192449099}

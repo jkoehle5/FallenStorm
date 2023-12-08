@@ -12,6 +12,11 @@ public class scr_Enemy : MonoBehaviour
     [SerializeField] private float atkDist;
     [SerializeField] private float dtctRange;
     [SerializeField] private AIState aIState;
+    [SerializeField] private AudioClip audioClipRunnin;
+    [SerializeField] private AudioClip audioClipWalkin;
+    [SerializeField] private AudioClip audioClipDeath;
+
+    private AudioSource audioSource;
     private NavMeshAgent agent;
     private Transform rightHandTransform;
 
@@ -26,6 +31,7 @@ public class scr_Enemy : MonoBehaviour
         //animation = GetComponent<Animator>();
         rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
         weapon.AttachGunToRightHandEnemy(motion);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -98,10 +104,20 @@ public class scr_Enemy : MonoBehaviour
 
     private void Die() {
         // Drop Gun
-        weapon.Drop(transform);
+        weapon.EnemyDrop(transform);
 
+        // Play death SFX
+        if (!audioSource.isPlaying) {
+            audioSource.clip = audioClipDeath;
+            audioSource.Play();
+        } else {
+            // Pause it if stop moving
+            audioSource.Pause();
+            audioSource.clip = audioClipDeath;
+            audioSource.Play();
+        }
         // Play Anim
-        //motion.SetBool("Dyin", true);
+        motion.Play("Death");
     }
 
     /*private void PlayFootstepSounds() {
