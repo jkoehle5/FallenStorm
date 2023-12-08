@@ -50,12 +50,12 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
     // Update is called once per frame
     void Update() {
-        if(!inHand && ammo == 0) {
+        if(!inHand && ammo <= 0) {
             Destroy(self);
         }
 
         if(inHand) {
-            transform.LookAt(transform.position + Camera.main.transform.forward, Camera.main.transform.up);
+            transform.LookAt(transform.position + (Camera.main.transform.forward * -1), Camera.main.transform.up);
         }
     }
 
@@ -152,7 +152,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
     public void Drop(Transform pos) {
         RemoveAmmo?.Invoke();
-        rb.isKinematic = true;
+        rb.isKinematic = false;
         rb.useGravity = true;
         rb.mass = 0.1f;
         transform.SetParent(null);
@@ -166,7 +166,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
     public void EnemyDrop(Transform pos) {
         //RemoveAmmo?.Invoke();
-        rb.isKinematic = true;
+        rb.isKinematic = false;
         rb.useGravity = true;
         rb.mass = 0.1f;
         transform.SetParent(null);
@@ -185,10 +185,9 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         if (rightHandTransform != null) {
             // Attach the gun to the right hand
             transform.parent = rightHandTransform;
-            transform.localPosition = new Vector3 (0.045f, 0.3f, 0.045f);
-            transform.localRotation = Quaternion.Euler(-90f, 0f, 180f);
+            AIAttatchmentPoints();           
 
-            rb.isKinematic = false;
+            rb.isKinematic = true;
             rb.useGravity = false;
             step.enabled = false;
 
@@ -210,10 +209,9 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         if (rightHandTransform != null) {
             // Attach the gun to the right hand
             transform.parent = rightHandTransform;
-            transform.localPosition = new Vector3 (0.13f, -0.05f, 0.05f);
-            transform.localRotation = Quaternion.Euler(0f, 90f, 90f);
+            PlayerAttatchmentPoints();
 
-            rb.isKinematic = false;
+            rb.isKinematic = true;
             rb.useGravity = false;
             step.enabled = false;
 
@@ -228,8 +226,8 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
     private void OnTriggerEnter(Collider other) {
         // If hit player, check if is Player and they have the same gun
-        if (other.CompareTag("Player")) {
-            scr_Weapon otherGun = other.gameObject.GetComponent<scr_Weapon>();
+        if (other.CompareTag("PlayerBits")) {
+            scr_Weapon otherGun = other.gameObject.transform.root.GetComponent<scr_PlayerMove>().gun;
             if (otherGun.gunType == gunType) {
                 Salvage(otherGun);
             }
@@ -239,14 +237,16 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     void Salvage(scr_Weapon other) {
         // Play salvage sound
         //audioSource.clip = audioClipPickUp;
+            Debug.Log("SalvageMe");
 
         // Take spare ammo till full
-        if (ammo <= maxAmmo) {
-            if (other.ammo < (maxAmmo - ammo)) {
-                ammo += other.ammo;
+        if (other.ammo <= maxAmmo) {
+            if (ammo < (maxAmmo - other.ammo)) {
+                other.ammo += ammo;
+                ammo = 0;
             } else {
-                other.ammo -= (maxAmmo - ammo);
-                ammo = maxAmmo;
+                ammo -= (maxAmmo - other.ammo);
+                other.ammo = maxAmmo;
             }
         }
     }
@@ -261,6 +261,41 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         ground, 
         inHand,
     }*/
+
+    private void AIAttatchmentPoints() {
+        switch (gunType) {
+            case (Gun.rifle):
+                transform.localPosition = new Vector3 (0.045f, 0.3f, 0.045f);
+                break;
+            case(Gun.mg):
+                transform.localPosition = new Vector3 (0.045f, 0.3f, 0.045f);
+                break;
+            case(Gun.sniper):
+                transform.localPosition = new Vector3 (0.045f, 0.3f, 0.045f);
+                break;
+            case(Gun.pistol):
+                transform.localPosition = new Vector3 (0.045f, 0.3f, 0.045f);
+                break;
+        }
+        transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+    }
+
+    private void PlayerAttatchmentPoints() {
+        switch (gunType) {
+            case(Gun.rifle):
+                transform.localPosition = new Vector3 (0.26f, -0.06f, 0.01f);
+                break;
+            case(Gun.pistol):
+                transform.localPosition = new Vector3 (0.13f, -0.05f, 0.05f);
+                break;
+            case(Gun.mg):
+                transform.localPosition = new Vector3 (0.27f, -0.045f, 0.04f);
+                break;
+            case(Gun.sniper):
+                transform.localPosition = new Vector3 (0.275f, -0.06f, 0.1f);
+                break;    
+        }
+    }
 
     public enum Gun{
         rifle, 

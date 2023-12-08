@@ -5,7 +5,7 @@ using UnityEngine;
 public class scr_PlayerMove : MonoBehaviour
 {
     // Variable Cache 
-    [SerializeField] private Animator motion;
+    [SerializeField] public Animator motion;
     [SerializeField] float normalSpeed;
     [SerializeField] float sprintSpeed;
     [SerializeField] float jump;
@@ -13,7 +13,7 @@ public class scr_PlayerMove : MonoBehaviour
     [SerializeField] float smooth;
     [SerializeField] private Transform feet;
     [SerializeField] private LayerMask enviro;
-    [SerializeField] private scr_Weapon gun;
+    [SerializeField] public scr_Weapon gun;
     [SerializeField] private Camera handCam;
     [SerializeField] private AudioClip audioClipWalkin;
     [SerializeField] private AudioClip audioClipRunnin;
@@ -36,7 +36,7 @@ public class scr_PlayerMove : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        
+        if (Time.timeScale != 0) {
         // Player rotation 
         Vector3 playerRotation = new Vector3(inputManager.GetPlayerMovement().x, 0f, inputManager.GetPlayerMovement().y);
         if (playerRotation.magnitude > 1f) {
@@ -117,7 +117,11 @@ public class scr_PlayerMove : MonoBehaviour
             audioSource.Pause();
             motion.SetBool("isRunnin", false);
             motion.SetBool("isWalkin", false);
-        }
+        }}
+    }
+
+    public void Die() {
+
     }
 
     private void PlayFootstepSounds() {

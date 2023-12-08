@@ -24,7 +24,11 @@ public class scr_PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update() {
         if (health <= 0) {
-            Destroy(player);
+            if (player.tag == "Player") {
+                player.GetComponent<scr_PlayerMove>().Die();
+            } else {
+                player.GetComponent<scr_Enemy>().Die();
+            }
         }
     }
 

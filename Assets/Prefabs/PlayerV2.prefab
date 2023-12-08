@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 3797398769942898438}
   m_Layer: 0
   m_Name: Chute/BalloonProto
-  m_TagString: Untagged
+  m_TagString: PlayerBits
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1322,7 +1322,7 @@ GameObject:
   - component: {fileID: 6143456882716719251}
   m_Layer: 0
   m_Name: Feet
-  m_TagString: Untagged
+  m_TagString: PlayerBits
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1377,7 +1377,7 @@ GameObject:
   - component: {fileID: 6611665240053015491}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: PlayerBits
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1528,6 +1528,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8310842784339754763, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -7319870295290025623, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -7215501804989551475, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -6833479802906322428, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -6650511554515235597, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
     - target: {fileID: -6531454658976086411, guid: 4f64fadee97f0c84abcd323f1b3fb494,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -1553,10 +1578,105 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2b343d6b532814549974780b8062f528, type: 2}
+    - target: {fileID: -5912894932395400830, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -5441733475878552817, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -5375008215205933317, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -3992794365973481968, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -3844196660226885714, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -3809142242850569558, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -3160147194347087031, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: -1795564485039009441, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 130342650481765802, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 741808593568725213, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 793919430143633779, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f64fadee97f0c84abcd323f1b3fb494,
         type: 3}
       propertyPath: m_Name
       value: SK_FP_CH_Default_Cubic
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007777169394542574, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630264496374376828, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 1874435250367549929, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 2392168281576377407, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106076137901352428, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982211394403846358, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 5062973238345657618, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 4f64fadee97f0c84abcd323f1b3fb494,
         type: 3}
@@ -1567,6 +1687,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WarningMessage
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6562552942284769236, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerBits
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 4f64fadee97f0c84abcd323f1b3fb494,
         type: 3}

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5136487261862643153}
-  - component: {fileID: 8432538173021374316}
   - component: {fileID: 7997307295872001800}
+  - component: {fileID: 8432538173021374316}
   - component: {fileID: 3500882139597707894}
   - component: {fileID: 6959126096164270283}
   - component: {fileID: 5763181234609497166}
@@ -38,29 +38,6 @@ Transform:
   - {fileID: 3907769167826194142}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8432538173021374316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3279842527953364503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 549758b069ed44d49a0b1760bcad0e03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 5316313090073308038, guid: de64bfe7af05beb4d81d49a83d2c721c, type: 3}
-  motion: {fileID: 210135319549658531}
-  weapon: {fileID: 5133875456482359048}
-  atkDist: 20
-  dtctRange: 40
-  aIState: 0
-  audioClipRunnin: {fileID: 8300000, guid: d2add02f58e61e640aba3ae9110591cb, type: 3}
-  audioClipWalkin: {fileID: 8300000, guid: 74abbbf1b1724e34b894191db38e10a0, type: 3}
-  audioClipDeath: {fileID: 8300000, guid: 9930d5b4be15bb04c9d0a6fa0d7e6b2e, type: 3}
-  playerDetect: 0
-  inRange: 0
 --- !u!114 &7997307295872001800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,6 +54,29 @@ MonoBehaviour:
   audioClipHit: {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
   audioClipHeal: {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
   health: 1
+--- !u!114 &8432538173021374316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279842527953364503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 549758b069ed44d49a0b1760bcad0e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5316313090073308038, guid: de64bfe7af05beb4d81d49a83d2c721c, type: 3}
+  motion: {fileID: 210135319549658531}
+  weapon: {fileID: 5133875456482359048}
+  atkDist: 40
+  dtctRange: 100
+  aIState: 0
+  audioClipRunnin: {fileID: 8300000, guid: d2add02f58e61e640aba3ae9110591cb, type: 3}
+  audioClipWalkin: {fileID: 8300000, guid: 74abbbf1b1724e34b894191db38e10a0, type: 3}
+  audioClipDeath: {fileID: 8300000, guid: 9930d5b4be15bb04c9d0a6fa0d7e6b2e, type: 3}
+  playerDetect: 0
+  inRange: 0
 --- !u!195 &3500882139597707894
 NavMeshAgent:
   m_ObjectHideFlags: 0

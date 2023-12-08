@@ -18,6 +18,8 @@ public class scr_Enemy : MonoBehaviour
 
     private AudioSource audioSource;
     private NavMeshAgent agent;
+    private float buffer = 5f;
+    private bool dead;
     private Transform rightHandTransform;
 
     public bool playerDetect;
@@ -32,19 +34,22 @@ public class scr_Enemy : MonoBehaviour
         rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
         weapon.AttachGunToRightHandEnemy(motion);
         audioSource = GetComponent<AudioSource>();
+        dead = false;
     }
 
     // Update is called once per frame
     void Update() {
         // Base Decision Matrix
-        if (agent.enabled) {
-            if (!playerDetect) {
-                aIState = AIState.Patrol;
-            } else if (!inRange) {
-                aIState = AIState.Chase;
-            } else if (inRange){
-                aIState = AIState.Attack;
-            }
+        if (agent.enabled && Time.timeScale != 0) {
+            if (aIState != AIState.Death) {
+                /*if (!playerDetect) {
+                    aIState = AIState.Patrol;
+                } else*/ if (!inRange) {
+                    aIState = AIState.Chase;
+                } else if (inRange){
+                    aIState = AIState.Attack;
+                }
+            }            
 
             switch (aIState) {
                 case(AIState.Chase):
@@ -53,14 +58,31 @@ public class scr_Enemy : MonoBehaviour
                 case(AIState.Attack):
                     Attacking();
                     break;
-                case(AIState.Patrol):
+                /*case(AIState.Patrol):
                     Patroling();
+                    break;*/
+                case(AIState.Death):
+                    if (!dead) {
+                        Died();
+                    } else {
+                        if (buffer > 0f) {
+                            // Decrease Despawn Timer
+                            buffer -= Time.deltaTime;
+                            
+                            // Enable Animation Motion
+                            transform.position += motion.deltaPosition;
+                            transform.rotation = motion.deltaRotation * transform.rotation;
+                        } else {
+                            // Despawn
+                            Destroy(gameObject);
+                        }
+                    }
                     break;
             }
         }
-        
     }
-    private void Patroling() {
+ 
+    /*private void Patroling() {
         // Set animator to walking
         motion.SetBool("isWalkin", true);
 
@@ -77,16 +99,26 @@ public class scr_Enemy : MonoBehaviour
         if (patrolDist.magnitude < 1f) {
             patrolPoint = patrolPoint.normalized;
         } 
-    }
+    }*/
 
     private void Chasing() {
         // Set animator to running
         motion.SetBool("isRunnin", true);
 
         agent.SetDestination(player.transform.position);
+
+        // Check if player in range
+        if ((player.transform.position - transform.position).magnitude <= (atkDist - 10f)) {
+            inRange = true;
+        }
     }
 
     private void Attacking () {
+        // Check if player out of range
+        if ((player.transform.position - transform.position).magnitude > atkDist) {
+            inRange = false;
+        }
+
         // Set animator to shooting
         motion.SetBool("isRunnin", false);
         motion.SetBool("Aimin", true);
@@ -101,21 +133,27 @@ public class scr_Enemy : MonoBehaviour
         weapon.Shoot(hit.point);
     }
 
-
-    private void Die() {
+    public void Die() {
+        aIState = AIState.Death;
+    }
+    public void Died() {
         // Drop Gun
         weapon.EnemyDrop(transform);
+
+        // Set Dead
+        dead = true;
 
         // Play death SFX
         if (!audioSource.isPlaying) {
             audioSource.clip = audioClipDeath;
             audioSource.Play();
         } else {
-            // Pause it if stop moving
+            // Pause Other SFX if playing
             audioSource.Pause();
-            audioSource.clip = audioClipDeath;
+            audioSource.PlayOneShot(audioClipDeath);
             audioSource.Play();
         }
+
         // Play Anim
         motion.Play("Death");
     }
