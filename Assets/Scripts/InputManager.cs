@@ -31,6 +31,10 @@ public class InputManager : MonoBehaviour
         playerControls.Disable();
     }
 
+    public bool PlayerAim() {
+        return playerControls.Player.Aim.triggered;
+    }
+
     public Vector2 GetPlayerMovement() {
         return playerControls.Player.Move.ReadValue<Vector2>();
     }

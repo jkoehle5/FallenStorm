@@ -401,14 +401,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireInterval: 15
   auto: 0
-  self: {fileID: 1829597508155286}
   rb: {fileID: 535264578558473720}
   dmg: 75
   range: 500
   clipSize: 6
+  maxAmmo: 36
   ammo: 36
+  weaponType: 0
+  ui: {fileID: 5616817258855493444, guid: 1f74203b730770a4ab73cadd65a8da3f, type: 3}
   clip: 6
   sights: {fileID: 0}
+  barrel: {fileID: 0}
+  bullet: {fileID: 570550346431328115, guid: 743cb6dd77fafd041b581f2aad85d19e, type: 3}
   inHand: 0
 --- !u!1001 &225420215501255973
 PrefabInstance:

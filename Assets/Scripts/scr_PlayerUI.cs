@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 
 public class scr_PlayerUI : MonoBehaviour
 {
+    
     [SerializeField] private TextMeshProUGUI ammoCounter;
     [SerializeField] private TextMeshProUGUI healthBar;
 
@@ -17,8 +19,14 @@ public class scr_PlayerUI : MonoBehaviour
         // Find the player GameObject in the scene
         player = GameObject.FindGameObjectWithTag("Player");
 
+        scr_Weapon.RemoveAmmo += RemoveAmmo;
+        scr_Weapon.AddAmmo += AddAmmo;
+
         // Get the components from the player
         playerHealth = player.GetComponent<scr_PlayerHealth>();
+        if (player.GetComponentInChildren<scr_Weapon>() != null) {
+            playerGun = player.GetComponentInChildren<scr_Weapon>();
+        }
         //playerGun = player.GetComponentInChildren<scr_Weapon>();
 
         // Set initial values for HUD elements
@@ -45,5 +53,16 @@ public class scr_PlayerUI : MonoBehaviour
     void UpdateHealthBar() {
         // Display the player's health
         healthBar.text = playerHealth.health + " / 100";
+    }
+
+    void RemoveAmmo() {
+        playerGun = null;
+    }
+
+    void AddAmmo() {
+        playerHealth = player.GetComponent<scr_PlayerHealth>();
+        if (player.GetComponentInChildren<scr_Weapon>() != null) {
+            playerGun = player.GetComponentInChildren<scr_Weapon>();
+        }
     }
 }

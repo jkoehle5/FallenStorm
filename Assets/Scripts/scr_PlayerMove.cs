@@ -85,6 +85,14 @@ public class scr_PlayerMove : MonoBehaviour
             }
         }
 
+        // Aim System
+        if (inputManager.PlayerAim()) {
+            motion.SetBool("isAimin", true);
+        } else {
+            motion.SetBool("isAimin", false);
+        }
+
+        // Reload System
         if (inputManager.PlayerReload()) {
             // Play Animation
             //motion.SetBool("Reloadin", true);
@@ -95,28 +103,30 @@ public class scr_PlayerMove : MonoBehaviour
         // Apply Movement
         controller.Move(playerVelocity * Time.deltaTime);
         // Apply Movement animation + SFX if movin
-        if (grounded && playerVelocity.sqrMagnitude > 0.1f) {
+        if (grounded && inputManager.GetPlayerMovement().magnitude > 0.1f) {
             PlayFootstepSounds();
             if (inputManager.PlayerSprint()) {
-                motion.SetBool("Runnin", true);
+                motion.SetBool("isRunnin", true);
+                motion.SetBool("isWalkin", false);
             } else {
                 motion.SetBool("isWalkin", true);
+                motion.SetBool("isRunnin", false);
             }               
+        } else if (audioSource.isPlaying) {
+            // Pause it if stop moving
+            audioSource.Pause();
+            motion.SetBool("isRunnin", false);
+            motion.SetBool("isWalkin", false);
         }
     }
 
     private void PlayFootstepSounds() {
-        // Check if moving
-        if (grounded && playerVelocity.sqrMagnitude > 0.1f)  {
-            // Select the correct audio to play
-            audioSource.clip = inputManager.PlayerSprint() ? audioClipRunnin : audioClipWalkin;
-            // Play Sound
-            if (!audioSource.isPlaying) {
-                audioSource.Play();
-            }
-        } else if (audioSource.isPlaying) {
-            // Pause it if stop moving
-            audioSource.Pause();
-        }
+        // Select the correct audio to play
+        audioSource.clip = inputManager.PlayerSprint() ? audioClipRunnin : audioClipWalkin;
+        
+        // Play Sound
+        if (!audioSource.isPlaying) {
+            audioSource.Play();
+        } 
     }
 }

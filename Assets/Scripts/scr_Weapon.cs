@@ -5,23 +5,30 @@ using UnityEngine;
 
 public class scr_Weapon : MonoBehaviour//, Interactable
 {
-    // Variable Cache 
+    // Event Cache
+    public static event System.Action AddAmmo;
+    public static event System.Action RemoveAmmo;
     //[SerializeField] private UnityEvent gunShot;
+    
+    // Variable Cache 
+    
     [SerializeField] private float fireInterval;
     [SerializeField] private bool auto;
-    [SerializeField] private GameObject self;
+    private GameObject self;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float dmg;
     [SerializeField] private float range;
     [SerializeField] private int clipSize;
     [SerializeField] private int maxAmmo;
     [SerializeField] public int ammo;
+    [SerializeField] public int weaponType;
     public int clip;
     public Transform sights;
     public Transform barrel;
     public GameObject bullet;
 
     private InputManager inputManager;
+    private Animator anime;
     public bool inHand;
     private float shotInterval;
     //private Transform handCam;
@@ -30,6 +37,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     void Start() {
         shotInterval = fireInterval;
         inputManager = InputManager.Instance;
+        self = this.gameObject;
         //handCam = Camera.main.transform;
         
     }
@@ -38,6 +46,10 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     void Update() {
         if(!inHand && ammo == 0) {
             Destroy(self);
+        }
+
+        if(inHand) {
+            transform.LookAt(transform.position + Camera.main.transform.forward, Camera.main.transform.up);
         }
     }
 
@@ -70,7 +82,12 @@ public class scr_Weapon : MonoBehaviour//, Interactable
             bulletBrain.dmg = dmg;
 
             // Generate gunflash and play fireSound
-
+            if (anime != null) {
+                anime.SetBool("Shootin", true);
+                if (inputManager.PlayerAim()) {
+                    anime.SetBool("isAimin", true);
+                }
+            }
 
             // Decrease ammo
             clip -= 1;
@@ -85,38 +102,62 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         }
     }
 
-    public Transform Aim() {
-        // Return camera pos to look down sights
-        return sights;
-    }
-
     public void Reload() {
         // Play animation for reload and reload
         if (ammo + clip > clipSize) {
+            // Play reload sound
+            if (anime != null) {
+                anime.SetBool("Reloadin", true);
+                if (clip <= 0) {
+                    anime.SetBool("Empty", true);
+                }
+            }
+            
             // Reset with full clip
             ammo = ammo - (clipSize - clip);
-            clip = clipSize;
-            
-            // Play reload sound
-
+            clip = clipSize;   
         } else {
+            // Play reload sound + animation
+            if (anime != null) {
+                anime.SetBool("Reloadin", true);
+                if (clip <= 0) {
+                    anime.SetBool("Empty", true);
+                } 
+            }
+            
             // Reset with partial clip
             clip += ammo;
-            ammo = 0;
+            ammo = 0;           
+        }
 
-            // Play reload sound + animation
-
+        // Play reload sound + animation
+        if (anime != null) {
+            anime.SetBool("Empty", false);
         }
         // Do Nothing
     }
 
     public void Drop(Transform pos) {
-        
+        RemoveAmmo?.Invoke();
         rb.isKinematic = true;
         rb.useGravity = true;
         rb.mass = 0.1f;
         transform.SetParent(null);
         inHand = false;
+        anime = null;
+
+        rb.velocity = pos.forward * 2f;
+        rb.velocity += Vector3.up * 1.5f;
+    }
+
+    public void EnemyDrop(Transform pos) {
+        //RemoveAmmo?.Invoke();
+        rb.isKinematic = true;
+        rb.useGravity = true;
+        rb.mass = 0.1f;
+        transform.SetParent(null);
+        inHand = false;
+        anime = null;
 
         rb.velocity = pos.forward * 2f;
         rb.velocity += Vector3.up * 1.5f;
@@ -128,9 +169,9 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
         if (rightHandTransform != null) {
             // Attach the gun to the right hand
-            self.transform.parent = rightHandTransform;
-            self.transform.localPosition = new Vector3 (0.045f, 0.3f, 0.045f);
-            self.transform.localRotation = Quaternion.Euler(-90f, 0f, 180f);
+            transform.parent = rightHandTransform;
+            transform.localPosition = new Vector3 (0.045f, 0.3f, 0.045f);
+            transform.localRotation = Quaternion.Euler(-90f, 0f, 180f);
 
             rb.isKinematic = false;
             rb.useGravity = false;
@@ -145,17 +186,20 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     public void AttachGunToRightHand(Animator motion) {
         // Get the right hand bone transform
         Transform rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
+        motion.SetInteger("WeaponType", weaponType);
+        anime = motion;
 
         if (rightHandTransform != null) {
             // Attach the gun to the right hand
-            self.transform.parent = rightHandTransform;
-            self.transform.localPosition = new Vector3 (0.13f, -0.05f, 0.05f);
-            self.transform.localRotation = Quaternion.Euler(0f, 90f, 90f);
+            transform.parent = rightHandTransform;
+            transform.localPosition = new Vector3 (0.13f, -0.05f, 0.05f);
+            transform.localRotation = Quaternion.Euler(0f, 90f, 90f);
 
             rb.isKinematic = false;
             rb.useGravity = false;
 
             Debug.Log("Gun attached to the right hand!");
+            AddAmmo?.Invoke();
         }
         else {
             Debug.LogError("Failed to get right hand transform!");

@@ -58,14 +58,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireInterval: 2.5
   auto: 0
-  self: {fileID: 1117582899397640}
   rb: {fileID: 5349442289953753830}
   dmg: 15
   range: 250
   clipSize: 30
+  maxAmmo: 150
   ammo: 150
+  weaponType: 0
+  ui: {fileID: 5616817258855493444, guid: 1f74203b730770a4ab73cadd65a8da3f, type: 3}
   clip: 30
   sights: {fileID: 247615386275400550}
+  barrel: {fileID: 0}
+  bullet: {fileID: 570550346431328115, guid: 743cb6dd77fafd041b581f2aad85d19e, type: 3}
   inHand: 0
 --- !u!33 &33699190840813150
 MeshFilter:

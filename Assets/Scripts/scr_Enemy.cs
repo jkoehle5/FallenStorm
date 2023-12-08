@@ -83,7 +83,7 @@ public class scr_Enemy : MonoBehaviour
     private void Attacking () {
         // Set animator to shooting
         motion.SetBool("isRunnin", false);
-        motion.SetBool("Shootin", true);
+        motion.SetBool("Aimin", true);
 
         // Stop and face player
         agent.SetDestination(transform.position);
@@ -104,6 +104,16 @@ public class scr_Enemy : MonoBehaviour
         //motion.SetBool("Dyin", true);
     }
 
+    /*private void PlayFootstepSounds() {
+        // Select the correct audio to play
+        audioSource.clip = inputManager.PlayerSprint() ? audioClipRunnin : audioClipWalkin;
+        
+        // Play Sound
+        if (!audioSource.isPlaying) {
+            audioSource.Play();
+        } 
+    }*/
+
     private enum AIState {
         Patrol,
         Chase,
@@ -111,3 +121,16 @@ public class scr_Enemy : MonoBehaviour
         Death,
     }
 }
+
+/*
+// Apply Movement
+        controller.Move(playerVelocity * Time.deltaTime);
+        // Apply Movement animation + SFX if movin
+        if (grounded && inputManager.GetPlayerMovement().magnitude > 0.1f) {
+            PlayFootstepSounds();
+            if (inputManager.PlayerSprint()) {
+                motion.SetBool("Runnin", true);
+            } else {
+                motion.SetBool("isWalkin", true);
+            }               
+        } else */

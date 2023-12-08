@@ -249,13 +249,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireInterval: 4
   auto: 0
-  self: {fileID: 1694449805434718}
   rb: {fileID: 4305983639160871712}
   dmg: 15
   range: 200
   clipSize: 9
-  maxAmmo: 0
+  maxAmmo: 45
   ammo: 45
+  weaponType: 1
+  ui: {fileID: 5616817258855493444, guid: 1f74203b730770a4ab73cadd65a8da3f, type: 3}
   clip: 9
   sights: {fileID: 6755168752280446619}
   barrel: {fileID: 2579651410192449099}

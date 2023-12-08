@@ -133,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 2346212613842846730}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.05, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170,7 +170,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -1536,15 +1536,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 4f64fadee97f0c84abcd323f1b3fb494,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'pinky_03_l'\n\tTransform 'clavicle_r'\n\tTransform
-        'ring_03_r'\n\tTransform 'ring_01_r'\n\tTransform 'index_01_l'\n\tTransform
-        'index_03_l'\n\tTransform 'index_03_r'\n\tTransform 'index_01_r'\n\tTransform
-        'hand_r'\n\tTransform 'ring_02_r'\n\tand more ...\n\tFrom animation clip
-        'A_FP_PCH_AR_01_Reload'\n\tFrom animation clip 'A_FP_PCH_Handgun_Fire'\n\tFrom
-        animation clip 'A_FP_PCH_Handgun_Reload_Empty'\n\tFrom animation clip 'A_FP_PCH_Handgun_Run_01'\n\tFrom
-        animation clip 'A_FP_PCH_Handgun_Aim_Fire'\n\tFrom animation clip 'A_FP_PCH_Handgun_Aim_Pose'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 4f64fadee97f0c84abcd323f1b3fb494,
         type: 3}
@@ -1577,7 +1569,15 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5278399341459813804}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4238722136989926770}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3236661846135875546}
   m_SourcePrefab: {fileID: 100100000, guid: 4f64fadee97f0c84abcd323f1b3fb494, type: 3}
 --- !u!4 &2821217875071560863 stripped
 Transform:
@@ -1585,6 +1585,78 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2354331234754235252}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3201261197650245157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f64fadee97f0c84abcd323f1b3fb494,
+    type: 3}
+  m_PrefabInstance: {fileID: 2354331234754235252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4238722136989926770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3201261197650245157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 685777092dcb1bd4eb98a8061031ba3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8198475884729120485}
+--- !u!137 &3236661846135875546
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3201261197650245157}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2b343d6b532814549974780b8062f528, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 1
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: -6908991608639141670, guid: 4f64fadee97f0c84abcd323f1b3fb494, type: 3}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 0
 --- !u!4 &6171350767481102798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8433352160412543674, guid: 4f64fadee97f0c84abcd323f1b3fb494,
