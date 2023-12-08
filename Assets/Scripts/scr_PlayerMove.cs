@@ -5,15 +5,21 @@ using UnityEngine;
 public class scr_PlayerMove : MonoBehaviour
 {
     // Variable Cache 
+    [SerializeField] private Animator motion;
     [SerializeField] float normalSpeed;
     [SerializeField] float sprintSpeed;
     [SerializeField] float jump;
     [SerializeField] float gravity;
     [SerializeField] float smooth;
-    [SerializeField] Transform feet;
-    [SerializeField] LayerMask enviro;
+    [SerializeField] private Transform feet;
+    [SerializeField] private LayerMask enviro;
+    [SerializeField] private scr_Weapon gun;
+    [SerializeField] private Camera handCam;
+    [SerializeField] private AudioClip audioClipWalkin;
+    [SerializeField] private AudioClip audioClipRunnin;
 
-    [SerializeField] private bool grounded;
+    private bool grounded;
+    private AudioSource audioSource;
     private CharacterController controller;
     private Vector3 playerVelocity;
     private Vector3 forces;
@@ -24,6 +30,8 @@ public class scr_PlayerMove : MonoBehaviour
     void Start() {
         controller = GetComponent<CharacterController>();
         inputManager = InputManager.Instance;
+        gun.AttachGunToRightHand(motion);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,16 +58,58 @@ public class scr_PlayerMove : MonoBehaviour
             playerVelocity.y += gravity * Time.deltaTime;
         }
 
-        // Jump System 
-        if (inputManager.PlayerJumped() && grounded) {
-            // Jump animation 
+        if (grounded) {
+            // Jump System 
+            if (inputManager.PlayerJumped()) {
+                // Jump animation 
 
             
-            playerVelocity.y = Mathf.Sqrt(jump * -2f * gravity);
-            Debug.Log("Jump");
+                playerVelocity.y = Mathf.Sqrt(jump * -2f * gravity);
+                Debug.Log("Jump");
+            }
+
+            // Crouch System 
+            if (inputManager.PlayerCrouch()) {
+                // Crouch animation + collider change
+
+            }
+        }
+
+        // Shoot System
+        if (inputManager.PlayerShoot()) {
+            RaycastHit hit;
+            if (Physics.Raycast(handCam.transform.position, handCam.transform.forward, out hit, Mathf.Infinity)) {
+                gun.Shoot(hit.point);
+            } else { 
+                gun.Shoot(handCam.transform.position + handCam.transform.forward * 30f);
+            }
         }
 
         // Apply Movement
         controller.Move(playerVelocity * Time.deltaTime);
+        // Apply Movement animation + SFX if movin
+        if (grounded && playerVelocity.sqrMagnitude > 0.1f) {
+            PlayFootstepSounds();
+            if (inputManager.PlayerSprint()) {
+                motion.SetBool("Runnin", true);
+            } else {
+                motion.SetBool("isWalkin", true);
+            }               
+        }
+    }
+
+    private void PlayFootstepSounds() {
+        // Check if moving
+        if (grounded && playerVelocity.sqrMagnitude > 0.1f)  {
+            // Select the correct audio to play
+            audioSource.clip = inputManager.PlayerSprint() ? audioClipRunnin : audioClipWalkin;
+            // Play Sound
+            if (!audioSource.isPlaying) {
+                audioSource.Play();
+            }
+        } else if (audioSource.isPlaying) {
+            // Pause it if stop moving
+            audioSource.Pause();
+        }
     }
 }

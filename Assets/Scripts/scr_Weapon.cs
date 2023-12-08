@@ -14,9 +14,12 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     [SerializeField] private float dmg;
     [SerializeField] private float range;
     [SerializeField] private int clipSize;
+    [SerializeField] private int maxAmmo;
     [SerializeField] public int ammo;
     public int clip;
     public Transform sights;
+    public Transform barrel;
+    public GameObject bullet;
 
     private InputManager inputManager;
     public bool inHand;
@@ -38,19 +41,40 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         }
     }
 
-    public void Shoot() {
+    /*public void Shoot() {
+        
         Ray ray = new Ray(self.transform.position, self.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, range)) {
             if (hit.collider.gameObject.TryGetComponent(out scr_PlayerHealth other)) {
                 // Deal damage
                 other.TakeDamage(dmg);
+                Debug.Log("Bang");
             } else {
                 // Generate effect at point of impact
 
             }
         }
+        Debug.Log("BangBang");
         //ApplyRecoil();
         clip--;
+    }*/
+
+    // If have ammo and shotInterval allows shoot, otherwise play empty 
+    public void Shoot(Vector3 target) {
+        if (clip > 0) {
+            // Generate and Set Bullet parameters
+            GameObject shot = GameObject.Instantiate(bullet, barrel.position, Quaternion.identity);
+            scr_BulletBrain bulletBrain = bullet.GetComponent<scr_BulletBrain>();
+            bulletBrain.target = target;
+            bulletBrain.hit = true;
+            bulletBrain.dmg = dmg;
+
+            // Generate gunflash and play fireSound
+
+
+            // Decrease ammo
+            clip -= 1;
+        }
     }
 
     public void Interact(Animator other) {
@@ -67,17 +91,23 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     }
 
     public void Reload() {
-        // Play Reload Animation
-
-        if ((ammo + clip) > clipSize) {
-            ammo += clip;
+        // Play animation for reload and reload
+        if (ammo + clip > clipSize) {
+            // Reset with full clip
+            ammo = ammo - (clipSize - clip);
             clip = clipSize;
-            ammo -= clip;
+            
+            // Play reload sound
+
         } else {
+            // Reset with partial clip
             clip += ammo;
             ammo = 0;
+
+            // Play reload sound + animation
+
         }
-        
+        // Do Nothing
     }
 
     public void Drop(Transform pos) {
@@ -124,4 +154,6 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     }*/
 }
 
+    
 
+    
