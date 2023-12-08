@@ -114,13 +114,14 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4220910401126438}
   - {fileID: 4211039482249024}
   - {fileID: 4427154760744368}
   - {fileID: 4271122294997020}
+  - {fileID: 4783124210424077569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33990794486070434
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8398650b34146d45a564a2c1cd1dd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunType: 2
   fireInterval: 0.5
   auto: 1
   rb: {fileID: 5293301728913797812}
@@ -194,9 +196,13 @@ MonoBehaviour:
   maxAmmo: 3
   ammo: 300
   weaponType: 0
-  ui: {fileID: 5616817258855493444, guid: 1f74203b730770a4ab73cadd65a8da3f, type: 3}
+  audioClipFire: {fileID: 0}
+  audioClipDryFire: {fileID: 0}
+  audioClipReload: {fileID: 0}
+  audioClipReloadEmpty: {fileID: 0}
+  audioClipPickUp: {fileID: 0}
+  step: {fileID: 5231469148962240352}
   clip: 100
-  sights: {fileID: 0}
   barrel: {fileID: 0}
   bullet: {fileID: 570550346431328115, guid: 743cb6dd77fafd041b581f2aad85d19e, type: 3}
   inHand: 0
@@ -497,3 +503,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7466980132903972604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4783124210424077569}
+  m_Layer: 0
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4783124210424077569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7466980132903972604}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0205, y: 0.063, z: -0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4251306428143386}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

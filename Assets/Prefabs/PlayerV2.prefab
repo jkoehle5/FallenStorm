@@ -925,6 +925,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5316313090073308038}
+  audioClipHit: {fileID: 0}
+  audioClipHeal: {fileID: 0}
   health: 100
 --- !u!114 &4503048257476974021
 MonoBehaviour:

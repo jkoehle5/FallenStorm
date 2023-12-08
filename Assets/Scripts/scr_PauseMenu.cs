@@ -6,21 +6,26 @@ using UnityEngine.SceneManagement;
 public class scr_PauseMenu : MonoBehaviour {
     // Variables
     [SerializeField] public bool paused;
-    [SerializeField] GameObject obj_pauseMenu;
+    [SerializeField] private GameObject obj_pauseMenu;
+    [SerializeField] private GameObject cam;
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject menuUI;
+    [SerializeField] private GameObject endGame;
+    [SerializeField] private GameObject tutorial;
 
-    private bool runnin;
+    [SerializeField] private bool runnin;
+    private bool gameEnded;
 
     void Start() {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         paused = false;
+        gameEnded = false;
     }
 
     // If esc is pressed pause game or resume based on if it is already or not
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) && runnin) {
             if (paused) {
                 Resume();
             } else {
@@ -47,32 +52,57 @@ public class scr_PauseMenu : MonoBehaviour {
         Cursor.lockState = CursorLockMode.None;
     }
 
-    // Return to Main Menu
+    // Exits Game
     public void QuitGame () {
-        Time.timeScale = 1f;
-        //SceneManager.LoadScene("scn_MainMenu");
+        //Time.timeScale = 1f;
+        //SceneManager.LoadScene("MainMenu");
+        Application.Quit();
     }
 
     // Loads Main Menu
     public void MainMenu() {
-        /*if (obj_endGame.activeInHierarchy) {
-            obj_endGame.SetActive(false);
+        SceneManager.LoadScene("MainMenu");
+        if (endGame.activeInHierarchy) {
+            endGame.SetActive(false);
+            endTheGame(false);
         }
         else {
             obj_pauseMenu.SetActive(false);
         }
         
-        runnin = false;*/
+        menuUI.SetActive(true);
+        runnin = false;
         Time.timeScale = 0f;
     }
     
     // Starts game
     public void Play() {
-        // change main camera + ui to in game, versions
-        //runnin = true;
-        Time.timeScale = 1f;
         menuUI.SetActive(false);
-        //*/
-        //SceneManager.LoadScene("Store");
+        tutorial.SetActive(true);
+    }
+
+    public void Starting() {
+        // change main camera + ui to in game, versions
+        runnin = true;
+        Time.timeScale = 1f;
+        //tutorial.SetActive(false);
+        //inGameUI.SetActive(true);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        SceneManager.LoadScene("Ground");
+    }
+
+    public void endTheGame(bool gameEnd) {
+        gameEnded = gameEnd;
+    }
+
+    // Ends Game
+    public void EndGame() {
+        endGame.SetActive(true);
+        inGameUI.gameObject.SetActive(false);
+        Time.timeScale = 0f;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

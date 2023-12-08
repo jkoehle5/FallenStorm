@@ -11,7 +11,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     //[SerializeField] private UnityEvent gunShot;
     
     // Variable Cache 
-    
+    public Gun gunType;
     [SerializeField] private float fireInterval;
     [SerializeField] private bool auto;
     private GameObject self;
@@ -27,12 +27,11 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     [SerializeField] private AudioClip audioClipReload;
     [SerializeField] private AudioClip audioClipReloadEmpty;
     [SerializeField] private AudioClip audioClipPickUp;
+    [SerializeField] private Collider step;
 
     public int clip;
-    public Transform sights;
     public Transform barrel;
     public GameObject bullet;
-
     private AudioSource audioSource;
     private InputManager inputManager;
     private Animator anime;
@@ -46,8 +45,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         inputManager = InputManager.Instance;
         self = this.gameObject;
         audioSource = GetComponent<AudioSource>();
-        //handCam = Camera.main.transform;
-        
+        //step = GetComponent<BoxCollider>();       
     }
 
     // Update is called once per frame
@@ -95,13 +93,13 @@ public class scr_Weapon : MonoBehaviour//, Interactable
                 if (inputManager.PlayerAim()) {
                     anime.SetBool("isAimin", true);
                 }
-                //audioSource.clip = audioClipFire;
+                audioSource.PlayOneShot(audioClipFire);
             }
 
             // Decrease ammo
             clip -= 1;
         } else {
-            //audioSource.clip = audioClipDryFire;
+            audioSource.PlayOneShot(audioClipDryFire);
             anime.SetBool("Empty", true);
         } 
     }
@@ -110,7 +108,6 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         // Swap weapons
         if (!inHand) {
             AttachGunToRightHand(other);
-            inHand = true;
         }
     }
 
@@ -120,10 +117,10 @@ public class scr_Weapon : MonoBehaviour//, Interactable
             // Play reload sound
             if (anime != null) {
                 anime.SetBool("Reloadin", true);
-                //audioSource.clip = audioClipReload;
+                audioSource.PlayOneShot(audioClipReload);
                 if (clip <= 0) {
                     anime.SetBool("Empty", true);
-                    //audioSource.clip = audioClipReloadEmpty;
+                    audioSource.PlayOneShot(audioClipReloadEmpty);
                 }
             }
             
@@ -134,9 +131,9 @@ public class scr_Weapon : MonoBehaviour//, Interactable
             // Play reload sound + animation
             if (anime != null) {
                 anime.SetBool("Reloadin", true);
-                //audioSource.clip = audioClipReload;
+                audioSource.PlayOneShot(audioClipReload);
                 if (clip <= 0) {
-                    //audioSource.clip = audioClipReloadEmpty;
+                    audioSource.PlayOneShot(audioClipReloadEmpty);
                     anime.SetBool("Empty", true);
                 } 
             }
@@ -161,6 +158,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         transform.SetParent(null);
         inHand = false;
         anime = null;
+        step.enabled = true;
 
         rb.velocity = pos.forward * 2f;
         rb.velocity += Vector3.up * 1.5f;
@@ -174,6 +172,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         transform.SetParent(null);
         inHand = false;
         anime = null;
+        step.enabled = true;
 
         rb.velocity = pos.forward * 2f;
         rb.velocity += Vector3.up * 1.5f;
@@ -191,6 +190,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
             rb.isKinematic = false;
             rb.useGravity = false;
+            step.enabled = false;
 
             Debug.Log("Gun attached to the right hand!");
             //audioSource.clip = audioClipPickUp;
@@ -205,6 +205,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         Transform rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
         motion.SetInteger("WeaponType", weaponType);
         anime = motion;
+        inHand = true;
 
         if (rightHandTransform != null) {
             // Attach the gun to the right hand
@@ -214,6 +215,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
             rb.isKinematic = false;
             rb.useGravity = false;
+            step.enabled = false;
 
             Debug.Log("Gun attached to the right hand!");
             AddAmmo?.Invoke();
@@ -221,6 +223,31 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         }
         else {
             Debug.LogError("Failed to get right hand transform!");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        // If hit player, check if is Player and they have the same gun
+        if (other.CompareTag("Player")) {
+            scr_Weapon otherGun = other.gameObject.GetComponent<scr_Weapon>();
+            if (otherGun.gunType == gunType) {
+                Salvage(otherGun);
+            }
+        }
+    }
+
+    void Salvage(scr_Weapon other) {
+        // Play salvage sound
+        //audioSource.clip = audioClipPickUp;
+
+        // Take spare ammo till full
+        if (ammo <= maxAmmo) {
+            if (other.ammo < (maxAmmo - ammo)) {
+                ammo += other.ammo;
+            } else {
+                other.ammo -= (maxAmmo - ammo);
+                ammo = maxAmmo;
+            }
         }
     }
 
@@ -234,6 +261,13 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         ground, 
         inHand,
     }*/
+
+    public enum Gun{
+        rifle, 
+        pistol, 
+        mg, 
+        sniper
+    }
 }
 
     

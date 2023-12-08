@@ -280,13 +280,14 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4306242400190624}
   - {fileID: 4855566107710416}
   - {fileID: 4594675243249436}
   - {fileID: 229903813077801667}
+  - {fileID: 4235982321546621262}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33265667909663144
@@ -399,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8398650b34146d45a564a2c1cd1dd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunType: 3
   fireInterval: 15
   auto: 0
   rb: {fileID: 535264578558473720}
@@ -408,12 +410,48 @@ MonoBehaviour:
   maxAmmo: 36
   ammo: 36
   weaponType: 0
-  ui: {fileID: 5616817258855493444, guid: 1f74203b730770a4ab73cadd65a8da3f, type: 3}
+  audioClipFire: {fileID: 8300000, guid: f9eb44b85c96be5429737d4dcadbfa3b, type: 3}
+  audioClipDryFire: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
+  audioClipReload: {fileID: 8300000, guid: 778c7be53403f9e45804f5a61a13a3e6, type: 3}
+  audioClipReloadEmpty: {fileID: 8300000, guid: 1fe5c2e1733f354428fe88c1a7cbafe4,
+    type: 3}
+  audioClipPickUp: {fileID: 0}
+  step: {fileID: 8333047999531091195}
   clip: 6
-  sights: {fileID: 0}
-  barrel: {fileID: 0}
+  barrel: {fileID: 4235982321546621262}
   bullet: {fileID: 570550346431328115, guid: 743cb6dd77fafd041b581f2aad85d19e, type: 3}
   inHand: 0
+--- !u!1 &6285060476863054682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4235982321546621262}
+  m_Layer: 0
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4235982321546621262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285060476863054682}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.025, z: -0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4053999043310118}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &225420215501255973
 PrefabInstance:
   m_ObjectHideFlags: 0
