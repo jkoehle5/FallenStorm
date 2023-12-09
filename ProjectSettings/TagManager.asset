@@ -9,6 +9,7 @@ TagManager:
   - Boost
   - PlayerBits
   - OverLord
+  - UI
   layers:
   - Default
   - TransparentFX

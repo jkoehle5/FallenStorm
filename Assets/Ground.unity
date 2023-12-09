@@ -994,6 +994,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5008780319017946045, guid: 1f74203b730770a4ab73cadd65a8da3f,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI
+      objectReference: {fileID: 0}
     - target: {fileID: 5451585695851944275, guid: 1f74203b730770a4ab73cadd65a8da3f,
         type: 3}
       propertyPath: cam

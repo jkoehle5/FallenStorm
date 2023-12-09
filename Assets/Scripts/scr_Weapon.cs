@@ -42,7 +42,11 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
     // Start is called before the first frame update
     void Start() {
-        shotInterval = fireInterval;
+        if (auto) {
+            shotInterval = 0.05f;
+        } else {
+            shotInterval = fireInterval;
+        }        
         inputManager = InputManager.Instance;
         self = this.gameObject;
         audioSource = GetComponent<AudioSource>();
@@ -54,7 +58,11 @@ public class scr_Weapon : MonoBehaviour//, Interactable
         if(!inHand && ammo <= 0) {
             Destroy(self);
         }
-
+        
+        if (shotInterval > -1) {
+            shotInterval -= Time.deltaTime;
+        }
+        
         if(inHand) {
             transform.LookAt(transform.position + (Camera.main.transform.forward * -1), Camera.main.transform.up);
         }
@@ -80,7 +88,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
 
     // If have ammo and shotInterval allows shoot, otherwise play empty 
     public void Shoot(Vector3 target, bool ai) {
-        if (clip > 0) {
+        if (clip > 0 && (shotInterval < 0)) {
             // Generate and Set Bullet parameters
             GameObject shot = GameObject.Instantiate(bullet, barrel.position, Quaternion.identity);
             scr_BulletBrain bulletBrain = bullet.GetComponent<scr_BulletBrain>();
@@ -102,9 +110,16 @@ public class scr_Weapon : MonoBehaviour//, Interactable
                 audioSource.PlayOneShot(audioClipFire);
             }
 
+            // Reset cooldown
+            if (auto) {
+                shotInterval = 0.05f;
+            } else {
+                shotInterval = fireInterval;
+            }
+
             // Decrease ammo
             clip -= 1;
-        } else {
+        } else if (shotInterval < 0){
             audioSource.PlayOneShot(audioClipDryFire);
             anime.SetBool("Empty", true);
         } 

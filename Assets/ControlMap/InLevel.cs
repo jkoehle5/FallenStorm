@@ -172,7 +172,7 @@ public partial class @InLevel: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""ab555dec-165a-468a-83c5-2d6dcb823a58"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press,Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot"",

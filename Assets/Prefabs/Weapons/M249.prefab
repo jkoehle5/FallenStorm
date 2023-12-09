@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunType: 2
   bulletSpread: 0.8
-  fireInterval: 0.5
+  fireInterval: 0.05
   auto: 1
   rb: {fileID: 5293301728913797812}
   dmg: 7
