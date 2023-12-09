@@ -12,6 +12,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     
     // Variable Cache 
     public Gun gunType;
+    public float bulletSpread;
     [SerializeField] private float fireInterval;
     [SerializeField] private bool auto;
     private GameObject self;
@@ -78,7 +79,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     }*/
 
     // If have ammo and shotInterval allows shoot, otherwise play empty 
-    public void Shoot(Vector3 target) {
+    public void Shoot(Vector3 target, bool ai) {
         if (clip > 0) {
             // Generate and Set Bullet parameters
             GameObject shot = GameObject.Instantiate(bullet, barrel.position, Quaternion.identity);
@@ -86,6 +87,11 @@ public class scr_Weapon : MonoBehaviour//, Interactable
             bulletBrain.target = target;
             bulletBrain.hit = true;
             bulletBrain.dmg = dmg;
+            if (ai) {
+                bulletBrain.ai = true;
+            } else {
+                bulletBrain.player = true;
+            }
 
             // Generate gunflash and play fireSound
             if (anime != null) {
@@ -181,6 +187,7 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     public void AttachGunToRightHandEnemy(Animator motion) {
         // Get the right hand bone transform
         Transform rightHandTransform = motion.GetBoneTransform(HumanBodyBones.RightHand);
+        anime = motion;
 
         if (rightHandTransform != null) {
             // Attach the gun to the right hand
@@ -237,7 +244,6 @@ public class scr_Weapon : MonoBehaviour//, Interactable
     void Salvage(scr_Weapon other) {
         // Play salvage sound
         //audioSource.clip = audioClipPickUp;
-            Debug.Log("SalvageMe");
 
         // Take spare ammo till full
         if (other.ammo <= maxAmmo) {

@@ -79,9 +79,9 @@ public class scr_PlayerMove : MonoBehaviour
         if (inputManager.PlayerShoot()) {
             RaycastHit hit;
             if (Physics.Raycast(handCam.transform.position, handCam.transform.forward, out hit, Mathf.Infinity)) {
-                gun.Shoot(hit.point);
+                gun.Shoot(hit.point, false);
             } else { 
-                gun.Shoot(handCam.transform.position + handCam.transform.forward * 30f);
+                gun.Shoot((handCam.transform.position + handCam.transform.forward * 30f), false);
             }
         }
 

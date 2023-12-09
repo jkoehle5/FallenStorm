@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e429574bdd6474a888f3f11018e3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {x: -0.7405429, y: 1.4347702, z: -0.619209}
+  target: {x: -8.745545, y: 1.0228301, z: -4.505644}
   dmg: 15
   hit: 1
 --- !u!136 &9211727109829884105

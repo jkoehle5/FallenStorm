@@ -12,6 +12,8 @@ public class scr_PauseMenu : MonoBehaviour {
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject endGame;
     [SerializeField] private GameObject tutorial;
+    [SerializeField] private GameObject win;
+    [SerializeField] private GameObject lose;
 
     [SerializeField] private bool runnin;
     private bool gameEnded;
@@ -33,10 +35,19 @@ public class scr_PauseMenu : MonoBehaviour {
             }
         }
     }
+/*
+    public void WinGame() {
+        obj_pauseMenu.SetActive(true);
+    }
 
+    public void LoseGame() {
+        obj_pauseMenu.SetActive(true);
+    }
+*/
     // Resume Game
     public void Resume () {
         obj_pauseMenu.SetActive(false);
+        inGameUI.gameObject.SetActive(true);
         Time.timeScale = 1f;
         paused = false;
         Cursor.visible = false;
@@ -46,6 +57,7 @@ public class scr_PauseMenu : MonoBehaviour {
     // Pause Game
     public void Pause () {
         obj_pauseMenu.SetActive(true);
+        inGameUI.gameObject.SetActive(false);
         Time.timeScale = 0f;
         paused = true;
         Cursor.visible = true;
@@ -97,10 +109,16 @@ public class scr_PauseMenu : MonoBehaviour {
     }
 
     // Ends Game
-    public void EndGame() {
+    public void EndGame(bool winLose) {
         endGame.SetActive(true);
         inGameUI.gameObject.SetActive(false);
         Time.timeScale = 0f;
+        
+        if (winLose) {
+            win.SetActive(true);
+        } else { 
+            lose.SetActive(true);
+        }
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

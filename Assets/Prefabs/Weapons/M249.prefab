@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 2
+  bulletSpread: 0.8
   fireInterval: 0.5
   auto: 1
   rb: {fileID: 5293301728913797812}
@@ -198,10 +199,11 @@ MonoBehaviour:
   maxAmmo: 3
   ammo: 300
   weaponType: 0
-  audioClipFire: {fileID: 0}
-  audioClipDryFire: {fileID: 0}
-  audioClipReload: {fileID: 0}
-  audioClipReloadEmpty: {fileID: 0}
+  audioClipFire: {fileID: 8300000, guid: 9e9480b4d07646942b555fd43f2a0f71, type: 3}
+  audioClipDryFire: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
+  audioClipReload: {fileID: 8300000, guid: 125edb9e36f963249bc792cca38492b1, type: 3}
+  audioClipReloadEmpty: {fileID: 8300000, guid: c565065df3907944b8b58f0d27066ba8,
+    type: 3}
   audioClipPickUp: {fileID: 0}
   step: {fileID: 5231469148962240352}
   clip: 100

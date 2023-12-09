@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 1
+  bulletSpread: 0.5
   fireInterval: 4
   auto: 0
   rb: {fileID: 4305983639160871712}

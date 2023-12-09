@@ -7,13 +7,15 @@ using TMPro;
 
 public class scr_PlayerUI : MonoBehaviour
 {
-    
+    // Variable Cache
     [SerializeField] private TextMeshProUGUI ammoCounter;
     [SerializeField] private TextMeshProUGUI healthBar;
+    [SerializeField] private TextMeshProUGUI waveCounter;
 
     private GameObject player;
     private scr_PlayerHealth playerHealth;
     public scr_Weapon playerGun;
+    private scr_Overlord overlord;
 
     void Start() {
         // Find the player GameObject in the scene
@@ -29,6 +31,9 @@ public class scr_PlayerUI : MonoBehaviour
         }
         //playerGun = player.GetComponentInChildren<scr_Weapon>();
 
+        // Get wave manager
+        overlord = GameObject.FindGameObjectWithTag("OverLord").GetComponent<scr_Overlord>();
+
         // Set initial values for HUD elements
         UpdateAmmoCounter();
         UpdateHealthBar();
@@ -38,6 +43,7 @@ public class scr_PlayerUI : MonoBehaviour
         // Update HUD elements continuously
         UpdateAmmoCounter();
         UpdateHealthBar();
+        UpdateWaveCounter();
     }
 
     void UpdateAmmoCounter() {
@@ -53,6 +59,11 @@ public class scr_PlayerUI : MonoBehaviour
     void UpdateHealthBar() {
         // Display the player's health
         healthBar.text = "HP: " + playerHealth.health + " / 100";
+    }
+
+    void UpdateWaveCounter() {
+        // Display remaining enemies in the wave
+        waveCounter.text = "Wave: " + overlord.wavesPassed + ", " + overlord.aiField + " Enemies Left";
     }
 
     void RemoveAmmo() {
