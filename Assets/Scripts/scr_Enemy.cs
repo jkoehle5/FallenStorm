@@ -23,6 +23,7 @@ public class scr_Enemy : MonoBehaviour
 
     private Vector3 targetPosition;
     private float bulletSpread;
+    private float timer2;
     private AudioSource audioSource;
     private NavMeshAgent agent;
     private float buffer = 5f;
@@ -30,6 +31,7 @@ public class scr_Enemy : MonoBehaviour
     private Transform rightHandTransform;
 
     public bool playerDetect;
+    private bool cool;
     public bool inRange;
 
     private Vector3 patrolPoint;
@@ -73,6 +75,9 @@ public class scr_Enemy : MonoBehaviour
                 /*case(AIState.Patrol):
                     Patroling();
                     break;*/
+                case(AIState.Reloadin):
+                    Reload();
+                    break;
                 case(AIState.Death):
                     if (!dead) {
                         Died();
@@ -135,6 +140,25 @@ public class scr_Enemy : MonoBehaviour
         }
     }
 
+    private void Reload() {
+        if (!cool) {
+            timer2 = 0.5f;
+            cool = true;
+        }
+
+        // Stop Moving
+        agent.SetDestination(transform.position);
+
+        // Reload gun
+        weapon.Reload();
+
+        if (timer2 < 0) {
+            aIState = AIState.Chase;
+            cool = false;
+        }
+        timer2 -= Time.deltaTime;
+    }
+
     // Check that have a bead on the player
     private bool HasLineOfSight() {
         RaycastHit hit;
@@ -195,8 +219,6 @@ public class scr_Enemy : MonoBehaviour
         // Play Anim
         motion.Play("Death");
     }
-
-    
 
     private enum AIState {
         Patrol,

@@ -25,7 +25,7 @@ public class scr_PlayerCamera : MonoBehaviour
     // Update is called once per frame
     void Update() {
         // Check if paused then then take mouse input
-        if (!ui.paused) {
+        if (Time.timeScale != 0) {
             rotate.x -= inputManager.GetMouseDelta().y * dampning.y;
             rotate.y += inputManager.GetMouseDelta().x * dampning.x;
         }

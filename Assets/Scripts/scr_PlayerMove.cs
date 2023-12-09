@@ -32,6 +32,8 @@ public class scr_PlayerMove : MonoBehaviour
         inputManager = InputManager.Instance;
         gun.AttachGunToRightHand(motion);
         audioSource = GetComponent<AudioSource>();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
